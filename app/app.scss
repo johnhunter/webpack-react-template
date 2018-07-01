@@ -1,9 +1,0 @@
-$spacing: 20px;
-$baseColor: red;
-
-#app {
-    margin: $spacing;
-    padding: $spacing;
-    background: darken($baseColor, 35%);
-    color: lighten($baseColor, 35%);
-}

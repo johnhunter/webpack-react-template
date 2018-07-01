@@ -1,37 +1,45 @@
-var webpack = require('webpack');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
-  entry: [
-  'webpack-dev-server/client?http://localhost:8080',
-  'webpack/hot/only-dev-server',
-  './app/components/Main.js'
-  ],
+  entry: "./src/index.js",
   output: {
-    filename: 'public/bundle.js'
-  },
-  devServer: {
-    contentBase: './public',
-    hot: true
-  },
-  resolve: {
-    extensions: ['', '.js', '.jsx']
+    path: path.join(__dirname, "/dist"),
+    filename: "[name].js",
+    chunkFilename: "[id].js"
   },
   module: {
-    loaders: [{
-      test: /\.jsx?$/,
-      exclude: /(node_modules|bower_components)/,
-      loader: 'babel'
-    },{
-      test: /\.scss$/,
-      loader: ExtractTextPlugin.extract(['css','sass'])
-    }]
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: ["babel-loader"]
+      },
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              // you can specify a publicPath here
+              // by default it use publicPath in webpackOptions.output
+            }
+          },
+          "css-loader"
+        ]
+      }
+    ]
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new ExtractTextPlugin('public/style.css', {
-      allChunks: true
+    new HtmlWebpackPlugin({
+      template: "./src/index.html"
+    }),
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: "[name].css",
+      chunkFilename: "[id].css"
     })
   ]
 };
-

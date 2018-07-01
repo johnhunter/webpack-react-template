@@ -1,9 +1,17 @@
 # webpack-react-template
 
-A starter for deving on react / ES6 / webpack
+A starter for deving on react / webpack
 
-0. Clone
-0. `npm install`
-0. `npm run setup` will global install modules for esLint. If you don't want global esLint then `npm install --save-dev babel-eslint eslint eslint-plugin-react` instead
+1. Clone
+2. `npm install`
+3. `npm run start`
 
-This will get you a Hello World page at public/index.html
+This will get you a dev server Hello World page at dist/index.html
+
+## Features
+
+- React 16
+- Babel ES6
+- Webpack 4
+  - CSS extract plugin
+- esLint
